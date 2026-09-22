@@ -1,0 +1,11 @@
+station_id,station_name,city,state,latitude,longitude,elevation,station_type
+STN_001,Delhi Central Sensor #1,Delhi,Delhi,28.638736,77.202087,452.6,Traffic
+STN_002,Mumbai Central Sensor #2,Mumbai,Maharashtra,19.020406,72.893645,135.8,Coastal
+STN_003,Bengaluru Central Sensor #3,Bengaluru,Karnataka,13.050561,77.632972,61.3,Residential
+STN_004,Kolkata Central Sensor #4,Kolkata,West Bengal,22.543556,88.337642,150.9,Industrial
+STN_005,Hyderabad Central Sensor #5,Hyderabad,Telangana,17.397098,78.391036,287.6,Commercial
+STN_006,Chennai Central Sensor #6,Chennai,Tamil Nadu,13.123522,80.194506,126.7,Coastal
+STN_007,Ahmedabad Central Sensor #7,Ahmedabad,Gujarat,22.977099,72.500785,300.8,Industrial
+STN_008,Pune Central Sensor #8,Pune,Maharashtra,18.488926,73.886586,332.8,Residential
+STN_009,Jaipur Central Sensor #9,Jaipur,Rajasthan,26.885181,75.792846,384.1,Commercial
+STN_010,Lucknow Central Sensor #10,Lucknow,Uttar Pradesh,26.816687,80.993572,103.7,Traffic

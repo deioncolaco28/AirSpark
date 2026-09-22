@@ -1,0 +1,91 @@
+app:
+  name: "AirSpark"
+  version: "1.0.0"
+  environment: "development"
+  log_level: "INFO"
+
+paths:
+  raw_air_quality: "data/raw/air_quality.csv"
+  raw_weather: "data/raw/weather.csv"
+  raw_stations: "data/raw/stations.csv"
+  staging_dir: "data/staging"
+  processed_dir: "data/processed"
+  streaming_input_dir: "data/streaming/input"
+  streaming_checkpoint_dir: "data/streaming/checkpoints"
+  streaming_output_dir: "data/streaming/output"
+  benchmark_dir: "data/benchmarks"
+  sample_dir: "data/sample"
+  logs_dir: "logs"
+
+spark:
+  app_name: "AirSpark-BDA-Engine"
+  master: "local[*]"
+  driver_memory: "4g"
+  executor_memory: "2g"
+  shuffle_partitions: 8
+  default_parallelism: 8
+  adaptive_execution_enabled: true
+  log_level: "WARN"
+
+aqi:
+  standard: "US_EPA"  # Supported: "US_EPA", "INDIA_CPCB"
+  primary_pollutants:
+    - "pm2_5"
+    - "pm10"
+    - "no2"
+    - "so2"
+    - "co"
+    - "o3"
+
+data_quality:
+  missing_value_strategies:
+    numeric_pollutants: "forward_fill_or_median"
+    numeric_weather: "median"
+    categorical: "mode"
+  duplicate_subset_keys:
+    - "station_id"
+    - "timestamp"
+  outlier_method: "iqr"  # "iqr", "zscore", or "threshold"
+  iqr_multiplier: 3.0    # 3.0 for extreme outlier threshold (domain preservation)
+  zscore_threshold: 3.5
+  domain_limits:
+    pm2_5: [0.0, 1000.0]
+    pm10: [0.0, 1500.0]
+    no2: [0.0, 2000.0]
+    so2: [0.0, 2000.0]
+    co: [0.0, 100.0]
+    o3: [0.0, 500.0]
+    temperature: [-50.0, 60.0]
+    humidity: [0.0, 100.0]
+    wind_speed: [0.0, 150.0]
+    wind_direction: [0.0, 360.0]
+    pressure: [800.0, 1100.0]
+    rainfall: [0.0, 500.0]
+
+streaming:
+  batch_interval_seconds: 2
+  watermark_delay: "10 minutes"
+  window_duration: "10 minutes"
+  slide_duration: "5 minutes"
+  alert_thresholds:
+    aqi_unhealthy: 150.0
+    aqi_hazardous: 300.0
+    pm2_5_spike: 100.0
+    rate_of_change_pct: 50.0
+
+benchmark:
+  sizes:
+    small:
+      num_stations: 5
+      days: 7
+      frequency_minutes: 60
+    medium:
+      num_stations: 20
+      days: 30
+      frequency_minutes: 30
+    large:
+      num_stations: 50
+      days: 90
+      frequency_minutes: 15
+  partition_tests: [1, 2, 4, 8, 16]
+  random_seed: 42

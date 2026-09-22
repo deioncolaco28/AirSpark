@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Spark / Hadoop
+metastore_db/
+derby.log
+*.sparkStaging*
+spark-warehouse/
+.checkpoint/
+
+# Data directories (exclude generated large data)
+data/processed/
+data/staging/
+data/streaming/
+data/benchmarks/
+data/raw/*.csv
+data/raw/*.parquet
+!data/sample/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+logs/
+*.log
+
+# Streamlit
+.streamlit/
