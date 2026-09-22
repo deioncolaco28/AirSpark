@@ -4,8 +4,9 @@ Built with Streamlit and Plotly for high-performance Big Data visualization.
 Supports multi-tier datasets (Controlled Development & India-Scale CAAQMS Nationwide)
 with full hierarchical Location Exploration (Country ➔ State ➔ City ➔ Station).
 """
-from typing import Dict, Any, List, Optional, Tuple, Union
+import sys
 from pathlib import Path
+from typing import Dict, Any, List, Optional, Tuple, Union
 import json
 import pandas as pd
 import numpy as np
@@ -13,12 +14,26 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 
+# --- Project Root Bootstrap (Prevents Streamlit from shadowing the top-level 'app' package) ---
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DASHBOARD_DIR = str(Path(__file__).resolve().parent)
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+if DASHBOARD_DIR in sys.path:
+    sys.path.remove(DASHBOARD_DIR)
+
+# When Streamlit executes dashboard/app.py, it registers sys.modules['app'] to the dashboard script,
+# shadowing the top-level 'app' package. Evicting the shadowed module allows Python to load the real package.
+if "app" in sys.modules and not hasattr(sys.modules["app"], "__path__"):
+    del sys.modules["app"]
+
 from app.analytics.location_filter import LocationFilter
 
 # --- Project Identity & Official Constants ---
 PROJECT_NAME = "AirSpark"
 PROJECT_TAGLINE = "A Scalable Big Data Analytics Framework for Multi-Source Air Quality Monitoring and Spatio-Temporal AQI Analysis Using Apache Spark"
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
 
 # --- Color Scheme for Standard AQI Categories ---
 AQI_CATEGORY_COLORS = {
