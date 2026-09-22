@@ -1,0 +1,45 @@
+station_id,station_name,city,state,latitude,longitude,elevation,station_type
+IND_DL_001,Anand Vihar CPCB Continuous Station,Delhi,Delhi,28.6469,77.316,216.0,Traffic
+IND_DL_002,ITO Crossing Monitoring Station,Delhi,Delhi,28.6312,77.2494,213.0,Traffic
+IND_DL_003,R.K. Puram Residential Monitoring Station,Delhi,Delhi,28.5635,77.1865,224.0,Residential
+IND_DL_004,Punjabi Bagh Air Quality Station,Delhi,Delhi,28.6724,77.1265,218.0,Commercial
+IND_UP_001,Talkatora Industrial Area Station,Lucknow,Uttar Pradesh,26.8322,80.9022,123.0,Industrial
+IND_UP_002,Lalbagh Commercial Center Station,Lucknow,Uttar Pradesh,26.8467,80.9462,120.0,Commercial
+IND_UP_003,Nehru Nagar Ambient Station,Kanpur,Uttar Pradesh,26.4716,80.3218,126.0,Industrial
+IND_UP_004,Ardhali Bazar Station,Varanasi,Uttar Pradesh,25.3524,82.9782,81.0,Residential
+IND_UP_005,Sector 62 Institutional Area Station,Noida,Uttar Pradesh,28.6276,77.3699,200.0,Commercial
+IND_HR_001,Vikas Sadan Ambient Air Station,Gurugram,Haryana,28.4595,77.0266,220.0,Commercial
+IND_HR_002,Sector 16A Monitoring Station,Faridabad,Haryana,28.4112,77.3132,205.0,Industrial
+IND_PB_001,Golden Temple Complex Ambient Station,Amritsar,Punjab,31.62,74.8765,234.0,Commercial
+IND_PB_002,Punjab Agricultural University Station,Ludhiana,Punjab,30.901,75.808,244.0,Residential
+IND_RJ_001,Mansarovar Residential Sector Station,Jaipur,Rajasthan,26.8532,75.7685,431.0,Residential
+IND_RJ_002,Police Line Area Station,Jodhpur,Rajasthan,26.2784,73.0243,231.0,Commercial
+IND_CH_001,Sector 22 Ambient Air Station,Chandigarh,Chandigarh,30.7333,76.7794,321.0,Commercial
+IND_MH_001,Bandra Kurla Complex (BKC) Station,Mumbai,Maharashtra,19.0657,72.8687,8.0,Commercial
+IND_MH_002,Worli Coastal Monitoring Station,Mumbai,Maharashtra,19.0166,72.8168,5.0,Coastal
+IND_MH_003,Kurla West Industrial/Traffic Station,Mumbai,Maharashtra,19.0726,72.8845,11.0,Traffic
+IND_MH_004,Shivaji Nagar Central Station,Pune,Maharashtra,18.5314,73.8446,560.0,Commercial
+IND_MH_005,Hadapsar Industrial Sensor Station,Pune,Maharashtra,18.5089,73.9259,570.0,Industrial
+IND_MH_006,Civil Lines Ambient Air Station,Nagpur,Maharashtra,21.1524,79.0806,310.0,Residential
+IND_GJ_001,Maninagar Ambient Station,Ahmedabad,Gujarat,22.9978,72.6033,53.0,Industrial
+IND_GJ_002,Chandkheda Residential Station,Ahmedabad,Gujarat,23.1118,72.5722,55.0,Residential
+IND_GJ_003,Sachin GIDC Heavy Industrial Station,Surat,Gujarat,21.0825,72.8833,13.0,Industrial
+IND_KA_001,Silk Board Junction High-Traffic Station,Bengaluru,Karnataka,12.9172,77.6229,910.0,Traffic
+IND_KA_002,Peenya Industrial Complex Station,Bengaluru,Karnataka,13.0285,77.5197,925.0,Industrial
+IND_KA_003,BTM Layout Urban Air Station,Bengaluru,Karnataka,12.9166,77.6101,905.0,Residential
+IND_TN_001,Alandur Metro Traffic Station,Chennai,Tamil Nadu,13.0034,80.2014,14.0,Traffic
+IND_TN_002,Velachery Residential Monitoring Station,Chennai,Tamil Nadu,12.9815,80.218,10.0,Coastal
+IND_TN_003,SIDCO Industrial Estate Station,Coimbatore,Tamil Nadu,10.9634,76.9678,411.0,Industrial
+IND_TS_001,Sanathnagar Industrial Monitoring Station,Hyderabad,Telangana,17.4563,78.4439,542.0,Industrial
+IND_TS_002,Nehru Zoological Park Ambient Station,Hyderabad,Telangana,17.3506,78.4519,510.0,Residential
+IND_AP_001,GVMC Coastal Urban Station,Visakhapatnam,Andhra Pradesh,17.7231,83.3013,20.0,Coastal
+IND_KL_001,Vytilla Mobility Hub Traffic Station,Kochi,Kerala,9.9678,76.3195,4.0,Traffic
+IND_KL_002,Plamoodu Central Monitoring Station,Thiruvananthapuram,Kerala,8.5135,76.9442,18.0,Coastal
+IND_WB_001,Victoria Memorial Green Zone Station,Kolkata,West Bengal,22.5448,88.3426,9.0,Commercial
+IND_WB_002,Rabindra Bharati University Station,Kolkata,West Bengal,22.5855,88.3753,10.0,Traffic
+IND_WB_003,Belur Math Riverfront Station,Howrah,West Bengal,22.6288,88.3582,12.0,Industrial
+IND_BR_001,IGIMS Medical Campus Station,Patna,Bihar,25.619,85.0863,53.0,Residential
+IND_OD_001,Capital Hospital Area Station,Bhubaneswar,Odisha,20.2662,85.8236,45.0,Commercial
+IND_MP_001,Paryavaran Parisar EPCO Station,Bhopal,Madhya Pradesh,23.2332,77.4343,527.0,Residential
+IND_MP_002,Chhoti Gwaltoli Traffic Station,Indore,Madhya Pradesh,22.7196,75.8677,553.0,Traffic
+IND_AS_001,Pan Bazaar Brahmaputra Basin Station,Guwahati,Assam,26.1859,91.7483,55.0,Commercial

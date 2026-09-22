@@ -1,0 +1,943 @@
+{
+  "dataset_tier": "india",
+  "pipeline_execution_time": "2026-09-22 22:38:03",
+  "aqi_standard": "INDIA_CPCB",
+  "total_records": 31680,
+  "aqi_statistics": {
+    "min_aqi": 14.2,
+    "max_aqi": 500.0,
+    "mean_aqi": 206.5,
+    "out_of_range_count": 1628
+  },
+  "category_distribution": {
+    "Moderate": 7088,
+    "Severe": 2807,
+    "Good": 2044,
+    "Satisfactory": 8318,
+    "Poor": 4671,
+    "Very Poor": 6752
+  },
+  "quality_report_aq": {
+    "dataset": "Air Quality",
+    "initial_records": 32155,
+    "final_records": 31680,
+    "invalid_records": 0,
+    "duplicate_records": 475,
+    "domain_outliers_corrected": {
+      "pm2_5": 96,
+      "pm10": 0,
+      "no2": 0,
+      "so2": 0,
+      "co": 0,
+      "o3": 0,
+      "total_domain_outliers": 96
+    },
+    "statistical_outliers_flagged": 1370,
+    "statistical_outliers_breakdown": {
+      "pm2_5": 858,
+      "pm10": 828,
+      "no2": 524,
+      "so2": 522,
+      "co": 552,
+      "o3": 0,
+      "total_outlier_rows": 1370
+    },
+    "missing_before_cleaning": {
+      "pm2_5": 886,
+      "pm10": 864,
+      "no2": 949,
+      "so2": 871,
+      "co": 927,
+      "o3": 915
+    },
+    "missing_after_cleaning": {
+      "pm2_5": 0,
+      "pm10": 0,
+      "no2": 0,
+      "so2": 0,
+      "co": 0,
+      "o3": 0
+    },
+    "retention_percentage": 98.52,
+    "quality_score": 96.95
+  },
+  "quality_report_weather": {
+    "dataset": "Weather",
+    "initial_records": 31996,
+    "final_records": 31680,
+    "invalid_records": 0,
+    "duplicate_records": 316,
+    "domain_outliers_corrected": {
+      "temperature": 0,
+      "humidity": 0,
+      "wind_speed": 0,
+      "wind_direction": 0,
+      "pressure": 0,
+      "rainfall": 0,
+      "total_domain_outliers": 0
+    },
+    "missing_before_cleaning": {
+      "temperature": 594,
+      "humidity": 651,
+      "wind_speed": 618,
+      "wind_direction": 0,
+      "pressure": 683,
+      "rainfall": 645
+    },
+    "missing_after_cleaning": {
+      "temperature": 0,
+      "humidity": 0,
+      "wind_speed": 0,
+      "wind_direction": 0,
+      "pressure": 0,
+      "rainfall": 0
+    },
+    "retention_percentage": 99.01
+  },
+  "join_stats": {
+    "air_quality_records": 31680,
+    "weather_records": 31680,
+    "station_count": 44,
+    "integrated_records": 31680,
+    "matched_stations": 44,
+    "temporal_alignment": "exact"
+  },
+  "ml_metrics": {
+    "evaluation_strategy": "chronological_time_split",
+    "split_strategy": {
+      "strategy": "chronological",
+      "train_ratio": 0.8
+    },
+    "train_records": 25080,
+    "test_records": 6600,
+    "feature_count": 22,
+    "features": [
+      "pm2_5",
+      "pm10",
+      "no2",
+      "so2",
+      "co",
+      "o3",
+      "temperature",
+      "humidity",
+      "wind_speed",
+      "pressure",
+      "hour",
+      "day_of_week",
+      "month",
+      "is_weekend",
+      "lag_1_pm2_5",
+      "lag_1_aqi",
+      "rolling_3h_pm2_5_mean",
+      "rolling_3h_aqi_mean",
+      "prev_pm2_5",
+      "prev_aqi",
+      "rolling_pm2_5_mean",
+      "rolling_aqi_mean"
+    ],
+    "linear_regression": {
+      "rmse": 35.403,
+      "r2": 0.931,
+      "mae": 25.132,
+      "model_path": "C:\\Users\\colac\\OneDrive\\Desktop\\bda proj\\data\\models_india\\linear_regression"
+    },
+    "random_forest": {
+      "rmse": 13.385,
+      "r2": 0.99,
+      "mae": 8.088,
+      "model_path": "C:\\Users\\colac\\OneDrive\\Desktop\\bda proj\\data\\models_india\\random_forest"
+    },
+    "models": {
+      "linear_regression": {
+        "rmse": 35.403,
+        "r2": 0.931,
+        "mae": 25.132,
+        "model_path": "C:\\Users\\colac\\OneDrive\\Desktop\\bda proj\\data\\models_india\\linear_regression"
+      },
+      "random_forest": {
+        "rmse": 13.385,
+        "r2": 0.99,
+        "mae": 8.088,
+        "model_path": "C:\\Users\\colac\\OneDrive\\Desktop\\bda proj\\data\\models_india\\random_forest"
+      }
+    },
+    "best_model": "random_forest"
+  },
+  "correlations": {
+    "pm2_5": {
+      "pm2_5": 1.0,
+      "pm10": 0.97,
+      "no2": 0.875,
+      "so2": 0.674,
+      "co": 0.871,
+      "o3": -0.256,
+      "temperature": -0.443,
+      "humidity": -0.01,
+      "wind_speed": -0.235,
+      "wind_direction": 0.065,
+      "pressure": 0.099,
+      "rainfall": -0.083,
+      "aqi": 0.926
+    },
+    "pm10": {
+      "pm2_5": 0.97,
+      "pm10": 1.0,
+      "no2": 0.828,
+      "so2": 0.642,
+      "co": 0.823,
+      "o3": -0.241,
+      "temperature": -0.478,
+      "humidity": -0.001,
+      "wind_speed": -0.212,
+      "wind_direction": 0.058,
+      "pressure": 0.101,
+      "rainfall": -0.077,
+      "aqi": 0.925
+    },
+    "no2": {
+      "pm2_5": 0.875,
+      "pm10": 0.828,
+      "no2": 1.0,
+      "so2": 0.55,
+      "co": 0.98,
+      "o3": -0.199,
+      "temperature": -0.19,
+      "humidity": -0.153,
+      "wind_speed": -0.309,
+      "wind_direction": 0.118,
+      "pressure": 0.098,
+      "rainfall": -0.093,
+      "aqi": 0.818
+    },
+    "so2": {
+      "pm2_5": 0.674,
+      "pm10": 0.642,
+      "no2": 0.55,
+      "so2": 1.0,
+      "co": 0.543,
+      "o3": -0.13,
+      "temperature": -0.187,
+      "humidity": -0.034,
+      "wind_speed": -0.211,
+      "wind_direction": 0.034,
+      "pressure": 0.066,
+      "rainfall": -0.086,
+      "aqi": 0.668
+    },
+    "co": {
+      "pm2_5": 0.871,
+      "pm10": 0.823,
+      "no2": 0.98,
+      "so2": 0.543,
+      "co": 1.0,
+      "o3": -0.199,
+      "temperature": -0.185,
+      "humidity": -0.153,
+      "wind_speed": -0.305,
+      "wind_direction": 0.118,
+      "pressure": 0.098,
+      "rainfall": -0.093,
+      "aqi": 0.813
+    },
+    "o3": {
+      "pm2_5": -0.256,
+      "pm10": -0.241,
+      "no2": -0.199,
+      "so2": -0.13,
+      "co": -0.199,
+      "o3": 1.0,
+      "temperature": 0.617,
+      "humidity": -0.551,
+      "wind_speed": 0.02,
+      "wind_direction": 0.051,
+      "pressure": -0.001,
+      "rainfall": 0.007,
+      "aqi": -0.254
+    },
+    "temperature": {
+      "pm2_5": -0.443,
+      "pm10": -0.478,
+      "no2": -0.19,
+      "so2": -0.187,
+      "co": -0.185,
+      "o3": 0.617,
+      "temperature": 1.0,
+      "humidity": -0.495,
+      "wind_speed": -0.17,
+      "wind_direction": 0.16,
+      "pressure": -0.139,
+      "rainfall": -0.0,
+      "aqi": -0.496
+    },
+    "humidity": {
+      "pm2_5": -0.01,
+      "pm10": -0.001,
+      "no2": -0.153,
+      "so2": -0.034,
+      "co": -0.153,
+      "o3": -0.551,
+      "temperature": -0.495,
+      "humidity": 1.0,
+      "wind_speed": 0.289,
+      "wind_direction": -0.169,
+      "pressure": -0.034,
+      "rainfall": -0.001,
+      "aqi": -0.011
+    },
+    "wind_speed": {
+      "pm2_5": -0.235,
+      "pm10": -0.212,
+      "no2": -0.309,
+      "so2": -0.211,
+      "co": -0.305,
+      "o3": 0.02,
+      "temperature": -0.17,
+      "humidity": 0.289,
+      "wind_speed": 1.0,
+      "wind_direction": -0.227,
+      "pressure": 0.088,
+      "rainfall": 0.005,
+      "aqi": -0.24
+    },
+    "wind_direction": {
+      "pm2_5": 0.065,
+      "pm10": 0.058,
+      "no2": 0.118,
+      "so2": 0.034,
+      "co": 0.118,
+      "o3": 0.051,
+      "temperature": 0.16,
+      "humidity": -0.169,
+      "wind_speed": -0.227,
+      "wind_direction": 1.0,
+      "pressure": 0.0,
+      "rainfall": -0.002,
+      "aqi": 0.058
+    },
+    "pressure": {
+      "pm2_5": 0.099,
+      "pm10": 0.101,
+      "no2": 0.098,
+      "so2": 0.066,
+      "co": 0.098,
+      "o3": -0.001,
+      "temperature": -0.139,
+      "humidity": -0.034,
+      "wind_speed": 0.088,
+      "wind_direction": 0.0,
+      "pressure": 1.0,
+      "rainfall": 0.008,
+      "aqi": 0.107
+    },
+    "rainfall": {
+      "pm2_5": -0.083,
+      "pm10": -0.077,
+      "no2": -0.093,
+      "so2": -0.086,
+      "co": -0.093,
+      "o3": 0.007,
+      "temperature": -0.0,
+      "humidity": -0.001,
+      "wind_speed": 0.005,
+      "wind_direction": -0.002,
+      "pressure": 0.008,
+      "rainfall": 1.0,
+      "aqi": -0.092
+    },
+    "aqi": {
+      "pm2_5": 0.926,
+      "pm10": 0.925,
+      "no2": 0.818,
+      "so2": 0.668,
+      "co": 0.813,
+      "o3": -0.254,
+      "temperature": -0.496,
+      "humidity": -0.011,
+      "wind_speed": -0.24,
+      "wind_direction": 0.058,
+      "pressure": 0.107,
+      "rainfall": -0.092,
+      "aqi": 1.0
+    }
+  },
+  "dominance_distribution": [
+    {
+      "dominant_pollutant": "PM2.5",
+      "count": 22700,
+      "percentage": 71.65
+    },
+    {
+      "dominant_pollutant": "PM10",
+      "count": 5736,
+      "percentage": 18.11
+    },
+    {
+      "dominant_pollutant": "O3",
+      "count": 2055,
+      "percentage": 6.49
+    },
+    {
+      "dominant_pollutant": "CO",
+      "count": 1180,
+      "percentage": 3.72
+    },
+    {
+      "dominant_pollutant": "NO2",
+      "count": 9,
+      "percentage": 0.03
+    }
+  ],
+  "seasonal_summary": [
+    {
+      "season": "Winter",
+      "mean_aqi": 206.48,
+      "min_aqi": 14.2,
+      "max_aqi": 500.0,
+      "avg_pm2_5": 106.39,
+      "total_records": 31680
+    }
+  ],
+  "city_summary": [
+    {
+      "city": "Kanpur",
+      "state": "Uttar Pradesh",
+      "station_count": 1,
+      "mean_aqi": 446.92,
+      "min_aqi": 158.2,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 286.58,
+      "mean_pm10": 529.12,
+      "total_readings": 720
+    },
+    {
+      "city": "Faridabad",
+      "state": "Haryana",
+      "station_count": 1,
+      "mean_aqi": 425.55,
+      "min_aqi": 130.6,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 259.81,
+      "mean_pm10": 491.6,
+      "total_readings": 720
+    },
+    {
+      "city": "Lucknow",
+      "state": "Uttar Pradesh",
+      "station_count": 2,
+      "mean_aqi": 368.57,
+      "min_aqi": 85.4,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 204.43,
+      "mean_pm10": 384.21,
+      "total_readings": 1440
+    },
+    {
+      "city": "Delhi",
+      "state": "Delhi",
+      "station_count": 4,
+      "mean_aqi": 367.52,
+      "min_aqi": 58.8,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 206.55,
+      "mean_pm10": 387.48,
+      "total_readings": 2880
+    },
+    {
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "station_count": 1,
+      "mean_aqi": 340.53,
+      "min_aqi": 94.7,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 164.5,
+      "mean_pm10": 311.42,
+      "total_readings": 720
+    },
+    {
+      "city": "Gurugram",
+      "state": "Haryana",
+      "station_count": 1,
+      "mean_aqi": 337.4,
+      "min_aqi": 85.5,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 161.45,
+      "mean_pm10": 308.02,
+      "total_readings": 720
+    },
+    {
+      "city": "Amritsar",
+      "state": "Punjab",
+      "station_count": 1,
+      "mean_aqi": 295.51,
+      "min_aqi": 65.8,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 136.48,
+      "mean_pm10": 260.66,
+      "total_readings": 720
+    },
+    {
+      "city": "Howrah",
+      "state": "West Bengal",
+      "station_count": 1,
+      "mean_aqi": 293.5,
+      "min_aqi": 63.1,
+      "max_aqi": 413.6,
+      "mean_pm2_5": 140.74,
+      "mean_pm10": 219.85,
+      "total_readings": 720
+    },
+    {
+      "city": "Jodhpur",
+      "state": "Rajasthan",
+      "station_count": 1,
+      "mean_aqi": 271.59,
+      "min_aqi": 87.1,
+      "max_aqi": 499.3,
+      "mean_pm2_5": 126.23,
+      "mean_pm10": 240.7,
+      "total_readings": 720
+    },
+    {
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "station_count": 1,
+      "mean_aqi": 259.57,
+      "min_aqi": 56.7,
+      "max_aqi": 466.9,
+      "mean_pm2_5": 120.92,
+      "mean_pm10": 231.96,
+      "total_readings": 720
+    },
+    {
+      "city": "Varanasi",
+      "state": "Uttar Pradesh",
+      "station_count": 1,
+      "mean_aqi": 245.97,
+      "min_aqi": 61.3,
+      "max_aqi": 446.8,
+      "mean_pm2_5": 114.77,
+      "mean_pm10": 218.03,
+      "total_readings": 720
+    },
+    {
+      "city": "Surat",
+      "state": "Gujarat",
+      "station_count": 1,
+      "mean_aqi": 236.75,
+      "min_aqi": 46.0,
+      "max_aqi": 364.0,
+      "mean_pm2_5": 111.54,
+      "mean_pm10": 174.5,
+      "total_readings": 720
+    },
+    {
+      "city": "Chandigarh",
+      "state": "Chandigarh",
+      "station_count": 1,
+      "mean_aqi": 208.66,
+      "min_aqi": 47.0,
+      "max_aqi": 362.9,
+      "mean_pm2_5": 98.31,
+      "mean_pm10": 186.47,
+      "total_readings": 720
+    },
+    {
+      "city": "Jaipur",
+      "state": "Rajasthan",
+      "station_count": 1,
+      "mean_aqi": 196.3,
+      "min_aqi": 45.9,
+      "max_aqi": 334.8,
+      "mean_pm2_5": 92.46,
+      "mean_pm10": 176.33,
+      "total_readings": 720
+    },
+    {
+      "city": "Indore",
+      "state": "Madhya Pradesh",
+      "station_count": 1,
+      "mean_aqi": 194.78,
+      "min_aqi": 58.9,
+      "max_aqi": 334.2,
+      "mean_pm2_5": 92.39,
+      "mean_pm10": 143.2,
+      "total_readings": 720
+    },
+    {
+      "city": "Kolkata",
+      "state": "West Bengal",
+      "station_count": 2,
+      "mean_aqi": 194.67,
+      "min_aqi": 26.5,
+      "max_aqi": 377.6,
+      "mean_pm2_5": 94.06,
+      "mean_pm10": 146.09,
+      "total_readings": 1440
+    },
+    {
+      "city": "Patna",
+      "state": "Bihar",
+      "station_count": 1,
+      "mean_aqi": 188.41,
+      "min_aqi": 44.7,
+      "max_aqi": 334.7,
+      "mean_pm2_5": 89.65,
+      "mean_pm10": 139.13,
+      "total_readings": 720
+    },
+    {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "station_count": 2,
+      "mean_aqi": 174.08,
+      "min_aqi": 28.4,
+      "max_aqi": 373.6,
+      "mean_pm2_5": 85.32,
+      "mean_pm10": 131.78,
+      "total_readings": 1440
+    },
+    {
+      "city": "Pune",
+      "state": "Maharashtra",
+      "station_count": 2,
+      "mean_aqi": 136.79,
+      "min_aqi": 23.0,
+      "max_aqi": 330.6,
+      "mean_pm2_5": 68.55,
+      "mean_pm10": 106.25,
+      "total_readings": 1440
+    },
+    {
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "station_count": 3,
+      "mean_aqi": 133.05,
+      "min_aqi": 16.8,
+      "max_aqi": 334.8,
+      "mean_pm2_5": 64.73,
+      "mean_pm10": 100.37,
+      "total_readings": 2160
+    },
+    {
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "station_count": 2,
+      "mean_aqi": 132.21,
+      "min_aqi": 21.6,
+      "max_aqi": 339.4,
+      "mean_pm2_5": 64.39,
+      "mean_pm10": 99.98,
+      "total_readings": 1440
+    },
+    {
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "station_count": 3,
+      "mean_aqi": 131.78,
+      "min_aqi": 15.0,
+      "max_aqi": 349.7,
+      "mean_pm2_5": 64.02,
+      "mean_pm10": 99.26,
+      "total_readings": 2160
+    },
+    {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "station_count": 1,
+      "mean_aqi": 119.55,
+      "min_aqi": 28.2,
+      "max_aqi": 279.3,
+      "mean_pm2_5": 61.55,
+      "mean_pm10": 96.34,
+      "total_readings": 720
+    },
+    {
+      "city": "Bhubaneswar",
+      "state": "Odisha",
+      "station_count": 1,
+      "mean_aqi": 103.32,
+      "min_aqi": 28.9,
+      "max_aqi": 243.1,
+      "mean_pm2_5": 54.89,
+      "mean_pm10": 85.55,
+      "total_readings": 720
+    },
+    {
+      "city": "Guwahati",
+      "state": "Assam",
+      "station_count": 1,
+      "mean_aqi": 98.67,
+      "min_aqi": 30.4,
+      "max_aqi": 226.9,
+      "mean_pm2_5": 52.48,
+      "mean_pm10": 81.55,
+      "total_readings": 720
+    },
+    {
+      "city": "Bhopal",
+      "state": "Madhya Pradesh",
+      "station_count": 1,
+      "mean_aqi": 94.05,
+      "min_aqi": 22.4,
+      "max_aqi": 230.5,
+      "mean_pm2_5": 50.2,
+      "mean_pm10": 78.5,
+      "total_readings": 720
+    },
+    {
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "station_count": 2,
+      "mean_aqi": 88.19,
+      "min_aqi": 18.3,
+      "max_aqi": 288.0,
+      "mean_pm2_5": 42.65,
+      "mean_pm10": 66.34,
+      "total_readings": 1440
+    },
+    {
+      "city": "Kochi",
+      "state": "Kerala",
+      "station_count": 1,
+      "mean_aqi": 85.22,
+      "min_aqi": 28.5,
+      "max_aqi": 196.2,
+      "mean_pm2_5": 46.47,
+      "mean_pm10": 72.56,
+      "total_readings": 720
+    },
+    {
+      "city": "Nagpur",
+      "state": "Maharashtra",
+      "station_count": 1,
+      "mean_aqi": 81.78,
+      "min_aqi": 24.0,
+      "max_aqi": 186.5,
+      "mean_pm2_5": 44.3,
+      "mean_pm10": 68.61,
+      "total_readings": 720
+    },
+    {
+      "city": "Visakhapatnam",
+      "state": "Andhra Pradesh",
+      "station_count": 1,
+      "mean_aqi": 57.98,
+      "min_aqi": 19.9,
+      "max_aqi": 98.5,
+      "mean_pm2_5": 25.8,
+      "mean_pm10": 39.49,
+      "total_readings": 720
+    },
+    {
+      "city": "Thiruvananthapuram",
+      "state": "Kerala",
+      "station_count": 1,
+      "mean_aqi": 49.63,
+      "min_aqi": 14.2,
+      "max_aqi": 95.1,
+      "mean_pm2_5": 18.26,
+      "mean_pm10": 28.58,
+      "total_readings": 720
+    }
+  ],
+  "state_summary": [
+    {
+      "state": "Haryana",
+      "city_count": 2,
+      "station_count": 2,
+      "mean_aqi": 381.47,
+      "min_aqi": 85.5,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 210.63,
+      "mean_pm10": 399.81,
+      "total_readings": 1440
+    },
+    {
+      "state": "Delhi",
+      "city_count": 1,
+      "station_count": 4,
+      "mean_aqi": 367.52,
+      "min_aqi": 58.8,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 206.55,
+      "mean_pm10": 387.48,
+      "total_readings": 2880
+    },
+    {
+      "state": "Uttar Pradesh",
+      "city_count": 4,
+      "station_count": 5,
+      "mean_aqi": 354.11,
+      "min_aqi": 61.3,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 194.94,
+      "mean_pm10": 365.4,
+      "total_readings": 3600
+    },
+    {
+      "state": "Punjab",
+      "city_count": 2,
+      "station_count": 2,
+      "mean_aqi": 277.54,
+      "min_aqi": 56.7,
+      "max_aqi": 500.0,
+      "mean_pm2_5": 128.7,
+      "mean_pm10": 246.31,
+      "total_readings": 1440
+    },
+    {
+      "state": "Rajasthan",
+      "city_count": 2,
+      "station_count": 2,
+      "mean_aqi": 233.95,
+      "min_aqi": 45.9,
+      "max_aqi": 499.3,
+      "mean_pm2_5": 109.34,
+      "mean_pm10": 208.51,
+      "total_readings": 1440
+    },
+    {
+      "state": "West Bengal",
+      "city_count": 2,
+      "station_count": 3,
+      "mean_aqi": 227.61,
+      "min_aqi": 26.5,
+      "max_aqi": 413.6,
+      "mean_pm2_5": 109.62,
+      "mean_pm10": 170.68,
+      "total_readings": 2160
+    },
+    {
+      "state": "Chandigarh",
+      "city_count": 1,
+      "station_count": 1,
+      "mean_aqi": 208.66,
+      "min_aqi": 47.0,
+      "max_aqi": 362.9,
+      "mean_pm2_5": 98.31,
+      "mean_pm10": 186.47,
+      "total_readings": 720
+    },
+    {
+      "state": "Gujarat",
+      "city_count": 2,
+      "station_count": 3,
+      "mean_aqi": 194.97,
+      "min_aqi": 28.4,
+      "max_aqi": 373.6,
+      "mean_pm2_5": 94.06,
+      "mean_pm10": 146.02,
+      "total_readings": 2160
+    },
+    {
+      "state": "Bihar",
+      "city_count": 1,
+      "station_count": 1,
+      "mean_aqi": 188.41,
+      "min_aqi": 44.7,
+      "max_aqi": 334.7,
+      "mean_pm2_5": 89.65,
+      "mean_pm10": 139.13,
+      "total_readings": 720
+    },
+    {
+      "state": "Madhya Pradesh",
+      "city_count": 2,
+      "station_count": 2,
+      "mean_aqi": 144.42,
+      "min_aqi": 22.4,
+      "max_aqi": 334.2,
+      "mean_pm2_5": 71.29,
+      "mean_pm10": 110.85,
+      "total_readings": 1440
+    },
+    {
+      "state": "Karnataka",
+      "city_count": 1,
+      "station_count": 3,
+      "mean_aqi": 133.05,
+      "min_aqi": 16.8,
+      "max_aqi": 334.8,
+      "mean_pm2_5": 64.73,
+      "mean_pm10": 100.37,
+      "total_readings": 2160
+    },
+    {
+      "state": "Telangana",
+      "city_count": 1,
+      "station_count": 2,
+      "mean_aqi": 132.21,
+      "min_aqi": 21.6,
+      "max_aqi": 339.4,
+      "mean_pm2_5": 64.39,
+      "mean_pm10": 99.98,
+      "total_readings": 1440
+    },
+    {
+      "state": "Maharashtra",
+      "city_count": 3,
+      "station_count": 6,
+      "mean_aqi": 125.12,
+      "min_aqi": 15.0,
+      "max_aqi": 349.7,
+      "mean_pm2_5": 62.24,
+      "mean_pm10": 96.48,
+      "total_readings": 4320
+    },
+    {
+      "state": "Odisha",
+      "city_count": 1,
+      "station_count": 1,
+      "mean_aqi": 103.32,
+      "min_aqi": 28.9,
+      "max_aqi": 243.1,
+      "mean_pm2_5": 54.89,
+      "mean_pm10": 85.55,
+      "total_readings": 720
+    },
+    {
+      "state": "Assam",
+      "city_count": 1,
+      "station_count": 1,
+      "mean_aqi": 98.67,
+      "min_aqi": 30.4,
+      "max_aqi": 226.9,
+      "mean_pm2_5": 52.48,
+      "mean_pm10": 81.55,
+      "total_readings": 720
+    },
+    {
+      "state": "Tamil Nadu",
+      "city_count": 2,
+      "station_count": 3,
+      "mean_aqi": 98.64,
+      "min_aqi": 18.3,
+      "max_aqi": 288.0,
+      "mean_pm2_5": 48.95,
+      "mean_pm10": 76.34,
+      "total_readings": 2160
+    },
+    {
+      "state": "Kerala",
+      "city_count": 2,
+      "station_count": 2,
+      "mean_aqi": 67.42,
+      "min_aqi": 14.2,
+      "max_aqi": 196.2,
+      "mean_pm2_5": 32.37,
+      "mean_pm10": 50.57,
+      "total_readings": 1440
+    },
+    {
+      "state": "Andhra Pradesh",
+      "city_count": 1,
+      "station_count": 1,
+      "mean_aqi": 57.98,
+      "min_aqi": 19.9,
+      "max_aqi": 98.5,
+      "mean_pm2_5": 25.8,
+      "mean_pm10": 39.49,
+      "total_readings": 720
+    }
+  ]
+}

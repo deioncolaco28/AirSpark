@@ -1,6 +1,7 @@
 """
 AirSpark Master Command Line Orchestrator.
 Unified entry point to run all pipeline stages, tests, benchmarks, and dashboard.
+Supports both Controlled Development and India-Scale Nationwide CAAQMS datasets.
 """
 import sys
 import subprocess
@@ -24,14 +25,21 @@ def main():
     # Subcommands
     subparsers.add_parser("validate", help="Validate system dependencies, Python, Java, PySpark")
     
-    gen_p = subparsers.add_parser("generate", help="Generate realistic multi-source synthetic datasets")
-    gen_p.add_argument("--stations", type=int, default=10, help="Number of monitoring stations")
+    gen_p = subparsers.add_parser("generate", help="Generate multi-source synthetic datasets (Controlled or India-scale)")
+    gen_p.add_argument("--dataset", type=str, default="dev", choices=["dev", "india"], help="Dataset tier: 'dev' (10 stations) or 'india' (44 stations nationwide)")
+    gen_p.add_argument("--stations", type=int, default=10, help="Number of monitoring stations (for dev tier)")
     gen_p.add_argument("--days", type=int, default=30, help="Number of days of data")
     gen_p.add_argument("--frequency", type=int, default=60, help="Frequency in minutes")
     gen_p.add_argument("--seed", type=int, default=42, help="Random seed for reproducible generation")
 
+    gen_ind_p = subparsers.add_parser("generate-india", help="Generate authentic India-scale CAAQMS multi-station dataset")
+    gen_ind_p.add_argument("--days", type=int, default=30, help="Number of days of data")
+    gen_ind_p.add_argument("--frequency", type=int, default=60, help="Frequency in minutes")
+    gen_ind_p.add_argument("--seed", type=int, default=42, help="Random seed for reproducible generation")
+
     batch_p = subparsers.add_parser("batch", help="Run master distributed batch processing pipeline")
-    batch_p.add_argument("--aqi-standard", type=str, default="US_EPA", choices=["US_EPA", "INDIA_CPCB"], help="AQI Standard")
+    batch_p.add_argument("--dataset", type=str, default="dev", choices=["dev", "india"], help="Target dataset: 'dev' or 'india'")
+    batch_p.add_argument("--aqi-standard", type=str, default="US_EPA", choices=["US_EPA", "INDIA_CPCB"], help="AQI Standard (US_EPA or INDIA_CPCB)")
     batch_p.add_argument("--skip-ml", action="store_true", help="Skip Spark ML model training")
     
     stream_p = subparsers.add_parser("streaming", help="Run Spark Structured Streaming live sensor demo")
@@ -56,15 +64,30 @@ def main():
     if args.command == "validate":
         return run_command(["scripts/validate_environment.py"])
     elif args.command == "generate":
+        if args.dataset == "india":
+            return run_command([
+                "scripts/generate_india_data.py",
+                "--days", str(args.days),
+                "--frequency", str(args.frequency),
+                "--seed", str(args.seed),
+            ])
+        else:
+            return run_command([
+                "scripts/generate_sample_data.py",
+                "--stations", str(args.stations),
+                "--days", str(args.days),
+                "--frequency", str(args.frequency),
+                "--seed", str(args.seed),
+            ])
+    elif args.command == "generate-india":
         return run_command([
-            "scripts/generate_sample_data.py",
-            "--stations", str(args.stations),
+            "scripts/generate_india_data.py",
             "--days", str(args.days),
             "--frequency", str(args.frequency),
             "--seed", str(args.seed),
         ])
     elif args.command == "batch":
-        cmd = ["scripts/run_batch.py", "--aqi-standard", args.aqi_standard]
+        cmd = ["scripts/run_batch.py", "--dataset", args.dataset, "--aqi-standard", args.aqi_standard]
         if args.skip_ml:
             cmd.append("--skip-ml")
         return run_command(cmd)

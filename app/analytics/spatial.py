@@ -24,6 +24,7 @@ class SpatialAnalytics:
         agg_exprs = [
             F.first("station_name").alias("station_name") if "station_name" in df.columns else F.first("station_id").alias("station_name"),
             F.first("city").alias("city") if "city" in df.columns else F.lit("Unknown").alias("city"),
+            F.first("state").alias("state") if "state" in df.columns else F.lit("Unknown").alias("state"),
             F.first("latitude").alias("latitude") if "latitude" in df.columns else F.lit(0.0).alias("latitude"),
             F.first("longitude").alias("longitude") if "longitude" in df.columns else F.lit(0.0).alias("longitude"),
             F.first("station_type").alias("station_type") if "station_type" in df.columns else F.lit("General").alias("station_type"),
@@ -50,9 +51,37 @@ class SpatialAnalytics:
         if "city" not in df.columns:
             return df
 
+        agg_cols = [
+            F.first("state").alias("state") if "state" in df.columns else F.lit("Unknown").alias("state"),
+            F.countDistinct("station_id").alias("station_count"),
+            F.round(F.avg("aqi"), 2).alias("mean_aqi"),
+            F.round(F.min("aqi"), 2).alias("min_aqi"),
+            F.round(F.max("aqi"), 2).alias("max_aqi"),
+            F.round(F.avg("pm2_5"), 2).alias("mean_pm2_5") if "pm2_5" in df.columns else F.lit(None),
+            F.round(F.avg("pm10"), 2).alias("mean_pm10") if "pm10" in df.columns else F.lit(None),
+            F.count("*").alias("total_readings"),
+        ]
+
         city_df = (
             df.groupBy("city")
+            .agg(*agg_cols)
+            .orderBy(F.col("mean_aqi").desc())
+        )
+        return city_df
+
+    @staticmethod
+    def compute_state_summary(df: DataFrame) -> DataFrame:
+        """
+        Aggregate air quality metrics per state.
+        """
+        logger.info("Computing state-level spatial summary")
+        if "state" not in df.columns:
+            return df
+
+        state_df = (
+            df.groupBy("state")
             .agg(
+                F.countDistinct("city").alias("city_count") if "city" in df.columns else F.lit(1).alias("city_count"),
                 F.countDistinct("station_id").alias("station_count"),
                 F.round(F.avg("aqi"), 2).alias("mean_aqi"),
                 F.round(F.min("aqi"), 2).alias("min_aqi"),
@@ -63,7 +92,7 @@ class SpatialAnalytics:
             )
             .orderBy(F.col("mean_aqi").desc())
         )
-        return city_df
+        return state_df
 
     @staticmethod
     def rank_stations_by_aqi(df: DataFrame, ascending: bool = False) -> DataFrame:

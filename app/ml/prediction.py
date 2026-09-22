@@ -118,6 +118,8 @@ class AQIPredictionModel:
         train_ratio: float = 0.8,
         models_dir: Optional[str] = "data/models",
         models_save_dir: Optional[str] = None,
+        predictions_path: Optional[str] = None,
+        metrics_path: Optional[str] = None,
         save_predictions: bool = True,
     ) -> Tuple[Dict[str, Any], DataFrame]:
         """
@@ -265,12 +267,24 @@ class AQIPredictionModel:
 
         # 5. Persist Predictions and Metrics
         if save_predictions:
-            proc_dir = ensure_dir("data/processed")
-            ParquetStorageManager.write_parquet(pred_df, proc_dir / "aqi_predictions.parquet")
-            
-            with open(proc_dir / "ml_metrics.json", "w", encoding="utf-8") as f:
-                json.dump(metrics, f, indent=2)
-            logger.info(f"Saved ML predictions to {proc_dir / 'aqi_predictions.parquet'} and metrics to {proc_dir / 'ml_metrics.json'}")
+            if predictions_path:
+                pred_target = resolve_path(predictions_path)
+                ensure_dir(str(pred_target.parent))
+                ParquetStorageManager.write_parquet(pred_df, pred_target)
+            else:
+                proc_dir = ensure_dir("data/processed")
+                ParquetStorageManager.write_parquet(pred_df, proc_dir / "aqi_predictions.parquet")
+
+            if metrics_path:
+                met_target = resolve_path(metrics_path)
+                ensure_dir(str(met_target.parent))
+                with open(met_target, "w", encoding="utf-8") as f:
+                    json.dump(metrics, f, indent=2)
+            else:
+                proc_dir = ensure_dir("data/processed")
+                with open(proc_dir / "ml_metrics.json", "w", encoding="utf-8") as f:
+                    json.dump(metrics, f, indent=2)
+            logger.info(f"Saved ML predictions and evaluation metrics successfully")
 
         logger.info(f"Spark ML Chronological Evaluation: LR R2={lr_r2:.3f}, RF R2={rf_r2:.3f} (Best: {best_model_name})")
         return metrics, pred_df

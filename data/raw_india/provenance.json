@@ -1,0 +1,151 @@
+{
+  "dataset_name": "AirSpark India-Scale Experimental Dataset",
+  "academic_provenance_statement": "India-scale experimental dataset using CPCB/CAAQMS-derived station metadata with controlled synthetic air-quality and meteorological observations.",
+  "plug_and_play_architecture": "The AirSpark ingestion and ETL pipeline is architected to seamlessly ingest actual CAAQMS continuous observation dumps without pipeline or schema modification.",
+  "provenance_classification": {
+    "authentic_source_derived_metadata": {
+      "status": "Authentic / Publicly Sourced Metadata",
+      "source_authorities": [
+        "Central Pollution Control Board (CPCB)",
+        "State Pollution Control Boards (SPCBs)",
+        "Ministry of Environment, Forest and Climate Change (MoEFCC)",
+        "National Air Quality Index (NAQI) Portal"
+      ],
+      "source_portal": "https://cpcb.nic.in/ / https://data.gov.in/",
+      "fields": [
+        "station_id",
+        "station_name",
+        "state",
+        "city",
+        "latitude",
+        "longitude",
+        "elevation",
+        "station_type"
+      ],
+      "geographic_scope": {
+        "country": "India",
+        "representative_stations_count": 44,
+        "states_count": 18,
+        "cities_count": 31,
+        "coordinate_reference_system": "WGS84 (EPSG:4326)",
+        "note": "Representative experimental subset across 18 States/UTs and 31 cities, not the complete Indian national monitoring network."
+      }
+    },
+    "controlled_synthetic_observations": {
+      "status": "Controlled Synthetic / Simulated Observations",
+      "generation_methodology": "Physics-informed numerical simulation incorporating regional baselines, diurnal boundary layer mixing, photochemical ozone kinetics, wind dispersion, and meteorological coupling.",
+      "pollutant_parameters": {
+        "pm2_5": {"unit": "µg/m³", "averaging_period": "24-hr / 1-hr", "standard": "NAAQS 60 µg/m³"},
+        "pm10": {"unit": "µg/m³", "averaging_period": "24-hr / 1-hr", "standard": "NAAQS 100 µg/m³"},
+        "no2": {"unit": "ppb", "averaging_period": "24-hr / 1-hr", "standard": "NAAQS 80 µg/m³"},
+        "so2": {"unit": "ppb", "averaging_period": "24-hr / 1-hr", "standard": "NAAQS 80 µg/m³"},
+        "co": {"unit": "ppm", "averaging_period": "8-hr / 1-hr", "standard": "NAAQS 2 mg/m³"},
+        "o3": {"unit": "ppb", "averaging_period": "8-hr / 1-hr", "standard": "NAAQS 100 µg/m³"}
+      },
+      "meteorological_parameters": {
+        "temperature": {"unit": "°C"},
+        "humidity": {"unit": "%"},
+        "wind_speed": {"unit": "m/s"},
+        "wind_direction": {"unit": "Degrees (0-360)"},
+        "pressure": {"unit": "hPa"},
+        "rainfall": {"unit": "mm"}
+      },
+      "temporal_coverage": {
+        "frequency": "Hourly continuous intervals (60m)",
+        "duration_days": 30,
+        "raw_air_quality_records": 32155,
+        "raw_weather_records": 31996
+      },
+      "controlled_data_quality_artifacts": {
+        "missing_values_rate": "~2.8% across pollutant and meteorological fields",
+        "duplicate_records_rate": "~1.5% across temporal keys",
+        "domain_violations_rate": "<0.5% (negative sensor glitch calibration)",
+        "purpose": "Provides empirical validation workload for AirSpark data quality cleaning and imputation pipeline."
+      }
+    },
+    "derived_analytics": {
+      "status": "Derived / Calculated Analytics (AirSpark Engine)",
+      "calculated_components": [
+        "Piecewise Linear AQI (Indian CPCB & US EPA standards, bounded 0-500)",
+        "Non-destructive Research Extrapolated AQI and Exceedance Flags",
+        "Individual Pollutant Sub-indices (PM2.5, PM10, NO2, SO2, CO, O3)",
+        "Dominant Pollutant Detection",
+        "Hotspot Severity Index (HSI) & Categorization",
+        "Data Quality Audit Scores and Imputation Metrics",
+        "Hierarchical Spatial Aggregations (Country ➔ State ➔ City ➔ Station)",
+        "Temporal Trends and 24-Hour Diurnal Hourly Curves",
+        "Weather-Pollutant Pearson Correlation Coefficients",
+        "Spark ML Predictive Models (Linear Regression, Random Forest, RMSE, MAE, R²)",
+        "Real-Time Streaming Alerts & Sliding Window Aggregations",
+        "Distributed Scalability Benchmark Metrics"
+      ]
+    }
+  },
+  "geographic_coverage": {
+    "country": "India",
+    "states_count": 18,
+    "cities_count": 31,
+    "stations_count": 44,
+    "states": [
+      "Andhra Pradesh",
+      "Assam",
+      "Bihar",
+      "Chandigarh",
+      "Delhi",
+      "Gujarat",
+      "Haryana",
+      "Karnataka",
+      "Kerala",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Odisha",
+      "Punjab",
+      "Rajasthan",
+      "Tamil Nadu",
+      "Telangana",
+      "Uttar Pradesh",
+      "West Bengal"
+    ],
+    "cities": [
+      "Ahmedabad",
+      "Amritsar",
+      "Bengaluru",
+      "Bhopal",
+      "Bhubaneswar",
+      "Chandigarh",
+      "Chennai",
+      "Coimbatore",
+      "Delhi",
+      "Faridabad",
+      "Gurugram",
+      "Guwahati",
+      "Howrah",
+      "Hyderabad",
+      "Indore",
+      "Jaipur",
+      "Jodhpur",
+      "Kanpur",
+      "Kochi",
+      "Kolkata",
+      "Lucknow",
+      "Ludhiana",
+      "Mumbai",
+      "Nagpur",
+      "Noida",
+      "Patna",
+      "Pune",
+      "Surat",
+      "Thiruvananthapuram",
+      "Varanasi",
+      "Visakhapatnam"
+    ],
+    "coordinate_bounds": {
+      "min_lat": 8.5135,
+      "max_lat": 31.62,
+      "min_lon": 72.5722,
+      "max_lon": 91.7483
+    }
+  },
+  "licensing": "Open Government Data License - India (OGDL) / Academic & Research Use",
+  "created_at": "2026-09-22T22:50:00.000000"
+}

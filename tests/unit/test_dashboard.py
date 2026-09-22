@@ -1,6 +1,6 @@
 """
 Unit tests for the AirSpark interactive analytics dashboard module.
-Validates branding, data loaders, map builders, and fault tolerance.
+Validates branding, multi-tier data loaders, map builders, location filtering, and fault tolerance.
 """
 import pytest
 import pandas as pd
@@ -35,16 +35,17 @@ def test_dashboard_branding_constants():
 def test_build_spatial_map_with_valid_data():
     """Verify build_spatial_map constructs a valid Plotly Figure with modern MapLibre API."""
     sample_df = pd.DataFrame({
-        "station_id": ["STN_001", "STN_002"],
-        "station_name": ["Central Sensor #1", "Central Sensor #2"],
-        "city": ["New Delhi", "Mumbai"],
-        "latitude": [28.6139, 19.0760],
-        "longitude": [77.2090, 72.8777],
-        "mean_aqi": [185.5, 95.2],
-        "max_aqi": [230.0, 120.0],
-        "hotspot_score": [75.0, 30.0],
-        "hotspot_level": ["Severe Hotspot", "Moderate Hotspot"],
-        "unhealthy_pct": [65.0, 15.0]
+        "station_id": ["IND_DL_001", "IND_MH_001"],
+        "station_name": ["Anand Vihar Station", "BKC Station"],
+        "city": ["Delhi", "Mumbai"],
+        "state": ["Delhi", "Maharashtra"],
+        "latitude": [28.6469, 19.0657],
+        "longitude": [77.3160, 72.8687],
+        "mean_aqi": [245.5, 135.2],
+        "max_aqi": [350.0, 180.0],
+        "hotspot_score": [78.0, 42.0],
+        "hotspot_level": ["Critical Hotspot", "Moderate Hotspot"],
+        "unhealthy_pct": [72.0, 25.0]
     })
 
     fig = build_spatial_map(sample_df)
@@ -80,31 +81,32 @@ def test_build_spatial_map_with_empty_or_invalid_data():
     assert build_spatial_map(out_of_bounds_df) is None
 
 
-def test_dashboard_data_loaders():
-    """Verify data loaders execute cleanly and return valid types."""
-    summary = load_pipeline_summary()
-    assert summary is None or isinstance(summary, dict)
+def test_dashboard_data_loaders_for_both_tiers():
+    """Verify data loaders execute cleanly for both India-scale and Dev dataset tiers."""
+    for tier in ["india", "dev"]:
+        summary = load_pipeline_summary(dataset_tier=tier)
+        assert summary is None or isinstance(summary, dict)
 
-    stations = load_station_summary()
-    assert isinstance(stations, pd.DataFrame)
+        stations = load_station_summary(dataset_tier=tier)
+        assert isinstance(stations, pd.DataFrame)
 
-    daily = load_daily_analytics()
-    assert isinstance(daily, pd.DataFrame)
+        daily = load_daily_analytics(dataset_tier=tier)
+        assert isinstance(daily, pd.DataFrame)
 
-    hourly = load_hourly_profile()
-    assert isinstance(hourly, pd.DataFrame)
+        hourly = load_hourly_profile(dataset_tier=tier)
+        assert isinstance(hourly, pd.DataFrame)
 
-    hotspots = load_hotspots()
-    assert isinstance(hotspots, pd.DataFrame)
+        hotspots = load_hotspots(dataset_tier=tier)
+        assert isinstance(hotspots, pd.DataFrame)
 
-    integrated = load_integrated_aqi()
-    assert isinstance(integrated, pd.DataFrame)
+        integrated = load_integrated_aqi(dataset_tier=tier)
+        assert isinstance(integrated, pd.DataFrame)
 
-    ml_metrics = load_ml_metrics()
-    assert ml_metrics is None or isinstance(ml_metrics, dict)
+        ml_metrics = load_ml_metrics(dataset_tier=tier)
+        assert ml_metrics is None or isinstance(ml_metrics, dict)
 
-    preds = load_predictions()
-    assert isinstance(preds, pd.DataFrame)
+        preds = load_predictions(dataset_tier=tier)
+        assert isinstance(preds, pd.DataFrame)
 
     benchmarks = load_benchmarks()
     assert isinstance(benchmarks, list)

@@ -26,6 +26,7 @@ class HotspotAnalyzer:
             .agg(
                 F.first("station_name").alias("station_name") if "station_name" in df.columns else F.first("station_id").alias("station_name"),
                 F.first("city").alias("city") if "city" in df.columns else F.lit("Unknown").alias("city"),
+                F.first("state").alias("state") if "state" in df.columns else F.lit("Unknown").alias("state"),
                 F.first("latitude").alias("latitude") if "latitude" in df.columns else F.lit(0.0).alias("latitude"),
                 F.first("longitude").alias("longitude") if "longitude" in df.columns else F.lit(0.0).alias("longitude"),
                 F.count("*").alias("total_readings"),
